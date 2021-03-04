@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Card } from '../styles/Search';
+import { Card, Form, SearchButton, RandomButton } from '../styles/Search';
 import Meals from './Meals';
 import RandomMeal from './RandomMeal';
 
@@ -9,6 +9,9 @@ const Search = () => {
   const [randomMeal, setRandomMeal] = useState({});
 
   const findMealbyName = async () => {
+    if (mealName === '') {
+      return;
+    }
     const data = await (
       await fetch(
         `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`
@@ -32,27 +35,25 @@ const Search = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <input
           type="text"
           value={mealName}
+          placeholder="Search for meals or keywords"
           onChange={(e) => setMealName(e.target.value)}
         />
-        <button
-          type="submit"
-          disabled={mealName === ''}
-          onClick={findMealbyName}
-        >
+        <SearchButton type="submit" onClick={findMealbyName}>
           <i className="fas fa-search"></i>
-        </button>
+        </SearchButton>
 
-        <button type="submit" onClick={handleRandomMeal}>
+        <RandomButton type="submit" onClick={handleRandomMeal}>
           <i className="fas fa-random"></i>
-        </button>
+        </RandomButton>
         {mealRecipes.meals === null && (
           <p>There are no search results. Try again!</p>
         )}
-      </form>
+      </Form>
+
       {randomMeal && <RandomMeal meal={randomMeal.meals} />}
 
       <Card>

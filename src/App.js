@@ -9,12 +9,21 @@ const Container = styled.div`
   text-align: center;
 `;
 
+const Title = styled.h1`
+  color: #fff;
+  font-size: 3rem;
+
+  @media screen and (max-width: 500px) {
+    font-size: 2rem;
+  }
+`;
+
 function App() {
   return (
     <>
       <GlobalStyle />
       <Container>
-        <h1>Meal Finder</h1>
+        <Title>Meal Finder</Title>
         <Search />
       </Container>
     </>

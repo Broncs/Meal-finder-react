@@ -1,11 +1,14 @@
 import React from 'react';
-import { CardItem } from '../styles/Meals';
+import { CardItem, CardInfo, CardImg } from '../styles/Meals';
 
 const Meals = ({ meals }) => {
   const { strMealThumb, strMeal } = meals;
   return (
     <CardItem>
-      <img src={strMealThumb} alt={strMeal} />
+      <CardImg src={strMealThumb} alt={strMeal} />
+      <CardInfo>
+        <h3>{strMeal}</h3>
+      </CardInfo>
     </CardItem>
   );
 };
