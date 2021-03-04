@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
 body{
   margin: 0;
   padding: 0;
-  background-color: teal;
+  background-color: #11999e;
   font-family: Arial, Helvetica, sans-serif
 } 
 `;

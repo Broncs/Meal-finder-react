@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Card, Form, SearchButton, RandomButton } from '../styles/Search';
+import {
+  Card,
+  Form,
+  SearchButton,
+  RandomButton,
+  ErrorMessage,
+} from '../styles/Search';
 import Meals from './Meals';
 import RandomMeal from './RandomMeal';
 
@@ -27,11 +33,25 @@ const Search = () => {
     ).json();
     setRandomMeal(data);
     setMealRecipes({});
+    setMealName('');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+  useEffect(() => {
+    async function fetchFirstMeal() {
+      const data = await (
+        await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`)
+      ).json();
+      setMealRecipes(data);
+    }
+    fetchFirstMeal();
+  }, []);
+
+  useEffect(() => {
+    findMealbyName();
+  }, [mealName]);
 
   return (
     <>
@@ -49,10 +69,10 @@ const Search = () => {
         <RandomButton type="submit" onClick={handleRandomMeal}>
           <i className="fas fa-random"></i>
         </RandomButton>
-        {mealRecipes.meals === null && (
-          <p>There are no search results. Try again!</p>
-        )}
       </Form>
+      {mealRecipes.meals === null && (
+        <ErrorMessage>There are no search results. Try again!</ErrorMessage>
+      )}
 
       {randomMeal && <RandomMeal meal={randomMeal.meals} />}
 

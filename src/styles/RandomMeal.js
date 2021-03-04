@@ -54,7 +54,7 @@ export const SingleMealIngredients = styled.div`
     border-radius: 5px;
     background-color: #fff;
     display: inline-block;
-    color: #2d2013;
+    color: #40514e;
     font-size: 12px;
     font-weight: bold;
     padding: 5px;

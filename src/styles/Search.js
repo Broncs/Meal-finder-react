@@ -28,7 +28,12 @@ export const Form = styled.form`
     margin: 0;
     max-width: 300px;
     flex: 1;
+    color: #40514e;
   }
+`;
+
+export const ErrorMessage = styled.p`
+  color: #fff;
 `;
 
 export const SearchButton = styled.button`
