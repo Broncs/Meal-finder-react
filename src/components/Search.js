@@ -13,27 +13,37 @@ const Search = () => {
   const [mealName, setMealName] = useState('');
   const [mealRecipes, setMealRecipes] = useState({});
   const [randomMeal, setRandomMeal] = useState({});
+  const [error, setError] = useState(null);
 
   const findMealbyName = async () => {
     if (mealName === '') {
       return;
     }
-    const data = await (
-      await fetch(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`
-      )
-    ).json();
-    setRandomMeal({});
-    setMealRecipes(data);
+
+    try {
+      const data = await (
+        await fetch(
+          `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`
+        )
+      ).json();
+      setRandomMeal({});
+      setMealRecipes(data);
+    } catch (error) {
+      setError(`Something went wrong ${error}`);
+    }
   };
 
   const handleRandomMeal = async () => {
-    const data = await (
-      await fetch('https://www.themealdb.com/api/json/v1/1/random.php')
-    ).json();
-    setRandomMeal(data);
-    setMealRecipes({});
-    setMealName('');
+    try {
+      const data = await (
+        await fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+      ).json();
+      setRandomMeal(data);
+      setMealRecipes({});
+      setMealName('');
+    } catch (error) {
+      setError(`Something went wrong ${error}`);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -41,10 +51,14 @@ const Search = () => {
   };
   useEffect(() => {
     async function fetchFirstMeal() {
-      const data = await (
-        await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`)
-      ).json();
-      setMealRecipes(data);
+      try {
+        const data = await (
+          await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`)
+        ).json();
+        setMealRecipes(data);
+      } catch (error) {
+        setError(`Something went wrong ${error}`);
+      }
     }
     fetchFirstMeal();
   }, []);
@@ -73,6 +87,8 @@ const Search = () => {
       {mealRecipes.meals === null && (
         <ErrorMessage>There are no search results. Try again!</ErrorMessage>
       )}
+
+      {error && <p>{error}</p>}
 
       {randomMeal && <RandomMeal meal={randomMeal.meals} />}
 
