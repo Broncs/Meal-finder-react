@@ -72,7 +72,6 @@ const Search = () => {
         const data = await (
           await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`)
         ).json();
-        setRandomMeal({});
         setMealRecipes(data);
         setStatus('resolved');
       } catch (error) {
