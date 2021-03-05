@@ -50,6 +50,14 @@ const Search = () => {
     }
   };
 
+  const fetchById = (id) => {
+    const singleMeal = mealRecipes.meals.find((meal) => meal.idMeal === id);
+    setRandomMeal({ meals: [singleMeal] });
+    setMealRecipes({});
+    setMealName('');
+    setStatus('resolved');
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (mealName) {
@@ -104,7 +112,13 @@ const Search = () => {
           <Card>
             {mealRecipes.meals &&
               mealRecipes.meals.map((meals) => {
-                return <Meals key={meals.idMeal} meals={meals} />;
+                return (
+                  <Meals
+                    key={meals.idMeal}
+                    meals={meals}
+                    fetchById={fetchById}
+                  />
+                );
               })}
           </Card>
         </>
