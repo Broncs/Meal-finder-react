@@ -11,9 +11,10 @@ const RandomMeal = ({ meal }) => {
     window.scrollTo(0, 0);
   }, [meal]);
 
-  if (!meal) {
-    return <> </>;
-  }
+  // if (!meal) {
+  //   return <> </>;
+  // }  //  i did it because i RANDOMMEAL && ''  os passing undefined because objects with nothing whitin is true ... so it pass
+
   const {
     strMeal,
     strMealThumb,

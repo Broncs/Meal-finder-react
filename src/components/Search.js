@@ -13,7 +13,7 @@ import RandomMeal from './RandomMeal';
 const Search = () => {
   const [mealName, setMealName] = useState('');
   const [mealRecipes, setMealRecipes] = useState({});
-  const [randomMeal, setRandomMeal] = useState({});
+  const [randomMeal, setRandomMeal] = useState(null);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState('idle');
 
@@ -25,7 +25,7 @@ const Search = () => {
           `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`
         )
       ).json();
-      setRandomMeal({});
+      setRandomMeal(null);
       setMealRecipes(data);
       setStatus('resolved');
     } catch (error) {
@@ -107,7 +107,7 @@ const Search = () => {
           )}
 
           {randomMeal && <RandomMeal meal={randomMeal.meals} />}
-
+          {console.log(randomMeal)}
           <Card>
             {mealRecipes.meals &&
               mealRecipes.meals.map((meals) => {
