@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import {
   SingleMeal,
   SingleMealImg,
@@ -7,6 +7,10 @@ import {
 } from '../styles/RandomMeal';
 
 const RandomMeal = ({ meal }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [meal]);
+
   if (!meal) {
     return <> </>;
   }
