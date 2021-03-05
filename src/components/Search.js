@@ -107,7 +107,6 @@ const Search = () => {
           )}
 
           {randomMeal && <RandomMeal meal={randomMeal.meals} />}
-          {console.log(randomMeal)}
           <Card>
             {mealRecipes.meals &&
               mealRecipes.meals.map((meals) => {
