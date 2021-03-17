@@ -121,7 +121,7 @@ const Search = () => {
           </Card>
         </>
       )}
-      {status === 'rejected' && <p>{error}</p>}
+      {status === 'rejected' && <p>something went wrong {error}</p>}
     </>
   );
 };
